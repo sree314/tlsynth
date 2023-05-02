@@ -190,7 +190,7 @@ class POperator:
         elif isinstance(v, POperator):
             return v.execute()
         else:
-            raise NotImplementedError(v)
+            raise NotImplementedError(type(v))
 
 class Nop(POperator):
     def execute(self):
