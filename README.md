@@ -20,7 +20,7 @@ program synthesis problem.
   - `cvcsolver.py`, a prototype that uses a SMT solver ([cvc5](https://cvc5.github.io/)) to implement a solver, though it is slower than `tlsolv.py` and does not yet produce all possible solutions.
 
 
-## Running
+## Examples
 
 To run `tl.py` or `tlsolv.py`, run:
 
