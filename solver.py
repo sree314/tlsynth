@@ -139,7 +139,7 @@ def SolveConstant(inp, out, cols):
         yield ConstantSln(k = kndx, v = out)
 
 def SolveSubstr(inp, out, cols, offset = 0, end = None):
-    k = list([kk for kk in cols if out in inp[kk]])
+    k = list([kk for kk in cols if out.lower() in inp[kk].lower()])
     kinps = [inp[kk] for kk in k]
 
     sols = []
@@ -267,55 +267,55 @@ def SolveSplitSplitSubstr(inp, out, cols):
                                       sep2 = s.sep2, m = s.m,
                                       start = s.start, length = s.length, c = s.c)
 
-def SolveSplitSubstr2(inp, out, cols):
-    k = list([kk for kk in cols if out in inp[kk]])
-    kinps = [inp[kk] for kk in k]
+# def SolveSplitSubstr2(inp, out, cols):
+#     k = list([kk for kk in cols if out in inp[kk]])
+#     kinps = [inp[kk] for kk in k]
 
-    sols = []
-    for X, kndx in zip(kinps, k):
-        p = X.find(out)
-        if p != -1:
-            possible_seps = dict()
-            for pos, c in enumerate(X):
-                if c not in possible_seps:
-                    possible_seps[c] = pos
+#     sols = []
+#     for X, kndx in zip(kinps, k):
+#         p = X.find(out)
+#         if p != -1:
+#             possible_seps = dict()
+#             for pos, c in enumerate(X):
+#                 if c not in possible_seps:
+#                     possible_seps[c] = pos
 
-            if p > 0:
-                sep_before = max([ps for ps in possible_seps.items() if ps[1] < p], key=lambda ps: ps[1])
-            else:
-                sep_before = None
+#             if p > 0:
+#                 sep_before = max([ps for ps in possible_seps.items() if ps[1] < p], key=lambda ps: ps[1])
+#             else:
+#                 sep_before = None
 
-            if p + len(out) + 1 < len(X):
-                sep_after = min([ps for ps in possible_seps.items() if ps[1] >= p + len(out)], key=lambda ps: ps[1])
-            else:
-                sep_after = None
+#             if p + len(out) + 1 < len(X):
+#                 sep_after = min([ps for ps in possible_seps.items() if ps[1] >= p + len(out)], key=lambda ps: ps[1])
+#             else:
+#                 sep_after = None
 
-            if sep_after:
-                sep, sep_pos = sep_after
-                if p + len(out) == sep_pos:
-                    sols.append(SS(k = kndx, sep = sep, m = 0, start = p, length = -1))
+#             if sep_after:
+#                 sep, sep_pos = sep_after
+#                 if p + len(out) == sep_pos:
+#                     sols.append(SS(k = kndx, sep = sep, m = 0, start = p, length = -1))
 
-                sols.append(SS(k = kndx, sep = sep, m = 0, start = p, length = len(out)))
+#                 sols.append(SS(k = kndx, sep = sep, m = 0, start = p, length = len(out)))
 
-            if sep_before:
-                sep, sep_pos = sep_before
-                if p + len(out) == len(X):
-                    sols.append(SS(k = kndx, sep = sep, m = 1, start = p - sep_pos, length = -1))
+#             if sep_before:
+#                 sep, sep_pos = sep_before
+#                 if p + len(out) == len(X):
+#                     sols.append(SS(k = kndx, sep = sep, m = 1, start = p - sep_pos, length = -1))
 
-                sols.append(SS(k = kndx, sep = sep, m = 1, start = p - sep_pos, length = len(out)))
+#                 sols.append(SS(k = kndx, sep = sep, m = 1, start = p - sep_pos, length = len(out)))
 
-    return sols
+#     return sols
 
-def SolveX(Inp, Out, cols):
-    out = Out[0]
-    prefixes = [out[:i] for i in reversed(range(1, len(out)+1))]
-    suffixes = [out[-i:] for i in reversed(range(len(out)+1))]
+# def SolveX(Inp, Out, cols):
+#     out = Out[0]
+#     prefixes = [out[:i] for i in reversed(range(1, len(out)+1))]
+#     suffixes = [out[-i:] for i in reversed(range(len(out)+1))]
 
-    for p, s in zip(prefixes, suffixes):
-        for sol in itertools.chain(SolveSplitSubstr(Inp[0], p, cols),
-                                   SolveSplitSubstr(Inp[0], s, cols)):
-            yy = SplitSubstr(Inp[0], sol.k, sol.sep, sol.m, sol.start, sol.length, sol.c).execute()
-            print(sol, '[' + yy + ']')
+#     for p, s in zip(prefixes, suffixes):
+#         for sol in itertools.chain(SolveSplitSubstr(Inp[0], p, cols),
+#                                    SolveSplitSubstr(Inp[0], s, cols)):
+#             yy = SplitSubstr(Inp[0], sol.k, sol.sep, sol.m, sol.start, sol.length, sol.c).execute()
+#             print(sol, '[' + yy + ']')
 
 if __name__ == "__main__":
     cols = [0]
