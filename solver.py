@@ -333,6 +333,6 @@ if __name__ == "__main__":
     #test_SelectK()
     #test_SolveSplit()
     #test_SolveSplitSelectK()
-    test_SolveSplitSubstrXY()
+    #test_SolveSplitSubstrXY()
     #test_SolveSubstr()
-    #test_SolveSplitSplitSubstrXY()
+    test_SolveSplitSplitSubstrXY()
