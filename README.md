@@ -20,4 +20,18 @@ program synthesis problem.
   - `cvcsolver.py`, a prototype that uses a SMT solver ([cvc5](https://cvc5.github.io/)) to implement a solver, though it is slower than `tlsolv.py` and does not yet produce all possible solutions.
 
 
+## Running
 
+To run `tl.py` or `tlsolv.py`, run:
+
+```
+python3 ./tl.py tests/pres1.csv tests/pres2.csv
+...
+FUNCTION Concat(SplitSplitSubstr(ROW, 0, ' ', 1, '(', 0, 0, -1, Case.UNCHANGED), Concat(Constant(' '), SplitSubstr(ROW, 0, ',', 0, 0, -1, Case.UNCHANGED)))
+...
+```
+
+For the other example, run:
+```
+python3 ./tlsolv.py tests/school1.csv tests/school2.csv --sc 1
+```
